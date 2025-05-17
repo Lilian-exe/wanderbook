@@ -6,7 +6,7 @@ body.dark-mode {
 }
 
 body.dark-mode .navbar {
-  background-color: #1e1e1e;
+  background-color:#02011c ;
   box-shadow: 0 2px 5px rgba(255,255,255,0.1);
 }
 
@@ -42,6 +42,6 @@ body.dark-mode .btn-primary:hover {
 }
 
 body.dark-mode .site-footer {
-  background-color: #111;
+  background-color: #02011c;
   color: #ccc;
 }

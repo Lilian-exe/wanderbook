@@ -2,42 +2,45 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login - WanderBook</title>
-  <link rel="stylesheet" href="css/login.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Autentificare - WanderBook</title>
+  <link rel="stylesheet" href="../public/css/login.css" />
+  <link rel="stylesheet" href="../public/css/style.css" />
+  <link rel="stylesheet" href="../public/css/dark.css" id="dark-theme" />
 </head>
 <body>
   <div id="navbar-container"></div>
 
-  <main class="login-container">
-    <h2>Autentificare</h2>
-    <form id="login-form">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required autocomplete="username" />
-      
-      <label for="password">Parolă:</label>
-      <input type="password" id="password" name="password" required autocomplete="current-password" />
-      
-      <button type="submit">Login</button>
+  <main>
+    <form class="login-form" id="login-form">
+      <h2>Autentificare</h2>
+      <div class="login-error" id="login-error"></div>
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+      <label for="password">Parolă</label>
+      <input type="password" id="password" required />
+      <button type="submit">Autentifică-te</button>
     </form>
-    <p>Nu ai cont? <a href="register.html">Înregistrează-te aici</a></p>
-    <div id="login-error" class="error-message hidden"></div>
   </main>
 
   <div id="footer-container"></div>
 
-  <script src="js/login.js"></script>
+  <script src="../public/js/main.js"></script>
   <script>
     async function loadComponents() {
       const navbarRes = await fetch('navbar.html');
       document.getElementById('navbar-container').innerHTML = await navbarRes.text();
-
       const footerRes = await fetch('footer.html');
       document.getElementById('footer-container').innerHTML = await footerRes.text();
-
-      if(window.initNavbar) window.initNavbar();
+      if (window.initNavbar) window.initNavbar();
     }
     loadComponents();
+
+    // Optional: gestionare submit formular autentificare
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      // Logica de autentificare aici
+    });
   </script>
 </body>
 </html>
