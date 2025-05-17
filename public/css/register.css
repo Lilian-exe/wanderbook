@@ -1,0 +1,74 @@
+/* Stiluri pentru pagina Register */
+
+body {
+  background-color: #eaf2f8;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+form.register-form {
+  max-width: 450px;
+  margin: 4rem auto;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+form.register-form h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+form.register-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+form.register-form input {
+  width: 100%;
+  padding: 0.55rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form.register-form input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+form.register-form button {
+  width: 100%;
+  background-color: #2980b9;
+  color: white;
+  padding: 0.85rem;
+  font-weight: 700;
+  border-radius: 30px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+form.register-form button:hover {
+  background-color: #1c5d8b;
+}
+
+.register-error {
+  color: #c0392b;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.register-success {
+  color: #27ae60;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}

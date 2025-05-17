@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalog planuri turistice - WanderBook</title>
+  <link rel="stylesheet" href="../public/css/catalog.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="catalog-container">
+    <h2>Planuri turistice</h2>
+    <button id="filter-toggle">Filtrare</button>
+    <div id="filter-menu" class="hidden">
+      <form id="filter-form">
+        <label>
+          Reviewuri:
+          <select name="rating" id="rating">
+            <option value="">Toate</option>
+            <option value="3">3 stele+</option>
+            <option value="4">4 stele+</option>
+            <option value="5">5 stele</option>
+          </select>
+        </label>
+
+        <label>
+          Țară:
+          <select name="country" id="country">
+            <option value="">Toate</option>
+            <option value="turcia">Turcia</option>
+            <option value="grecia">Grecia</option>
+            <option value="bulgaria">Bulgaria</option>
+          </select>
+        </label>
+
+        <label>
+          Preț (EUR):
+          <input type="number" name="price-min" id="price-min" placeholder="Min" min="0" />
+          -
+          <input type="number" name="price-max" id="price-max" placeholder="Max" min="0" />
+        </label>
+
+        <button type="submit">Aplică filtrele</button>
+      </form>
+    </div>
+
+    <div id="plans-container">
+      <!-- Planurile turistice vor fi încărcate din JS -->
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="../public/js/catalog.js"></script>
+  <script>
+    async function loadComponents() {
+      const navbarRes = await fetch('navbar.html');
+      document.getElementById('navbar-container').innerHTML = await navbarRes.text();
+
+      const footerRes = await fetch('footer.html');
+      document.getElementById('footer-container').innerHTML = await footerRes.text();
+
+      if(window.initNavbar) window.initNavbar();
+    }
+    loadComponents();
+  </script>
+</body>
+</html>

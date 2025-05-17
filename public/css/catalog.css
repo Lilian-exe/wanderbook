@@ -1,0 +1,117 @@
+/* Stiluri pagina catalog planuri turistice */
+
+.catalog-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.filters {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.filters input[type="number"], 
+.filters select {
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  min-width: 120px;
+  margin-top: 0.3rem;
+}
+
+.filters button {
+  background-color: #3498db;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background-color: #2980b9;
+}
+
+#plans-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+  gap: 1.5rem;
+}
+
+.plan-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(52,152,219,0.15);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card:hover {
+  box-shadow: 0 10px 30px rgba(52,152,219,0.3);
+}
+
+.plan-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.plan-card-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.plan-card-content p {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.plan-card-footer {
+  padding: 0.75rem 1rem;
+  background: #f1f1f1;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.plan-card-footer .price {
+  font-weight: 700;
+  color: #2980b9;
+}
+
+.plan-card-footer .rating {
+  color: #f39c12;
+  font-weight: 600;
+}

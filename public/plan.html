@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalii plan turistic - WanderBook</title>
+  <link rel="stylesheet" href="css/plan.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="plan-details-container">
+    <section class="plan-gallery" id="plan-gallery">
+      <!-- Imaginile planului vor fi afișate aici -->
+    </section>
+
+    <section class="plan-info">
+      <h2 id="plan-title">Titlul planului</h2>
+      <p id="plan-description">Descriere detaliată a planului turistic...</p>
+      <p><strong>Preț:</strong> <span id="plan-price">--</span> EUR</p>
+      <p><strong>Țară:</strong> <span id="plan-country">--</span></p>
+      <p><strong>Rating:</strong> <span id="plan-rating">--</span> ★</p>
+
+      <button id="reserve-plan-btn" class="btn-primary">Rezervă acum</button>
+    </section>
+
+    <section class="plan-reviews">
+      <h3>Recenzii</h3>
+      <ul id="reviews-list">
+        <!-- Recenziile vor fi afișate aici -->
+      </ul>
+
+      <h4>Lasă o recenzie</h4>
+      <form id="review-form">
+        <label for="review-rating">Rating:</label>
+        <select id="review-rating" name="rating" required>
+          <option value="">Selectează</option>
+          <option value="5">5 stele</option>
+          <option value="4">4 stele</option>
+          <option value="3">3 stele</option>
+          <option value="2">2 stele</option>
+          <option value="1">1 stea</option>
+        </select>
+
+        <label for="review-comment">Comentariu:</label>
+        <textarea id="review-comment" name="comment" rows="3" required></textarea>
+
+        <button type="submit">Trimite recenzia</button>
+      </form>
+
+      <div id="review-message" class="hidden"></div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/plan.js"></script>
+  <script>
+    async function loadComponents() {
+      const navbarRes = await fetch('navbar.html');
+      document.getElementById('navbar-container').innerHTML = await navbarRes.text();
+
+      const footerRes = await fetch('footer.html');
+      document.getElementById('footer-container').innerHTML = await footerRes.text();
+
+      if(window.initNavbar) window.initNavbar();
+    }
+    loadComponents();
+  </script>
+</body>
+</html>

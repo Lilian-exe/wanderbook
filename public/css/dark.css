@@ -1,0 +1,47 @@
+/* Tema Dark */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark-mode .navbar {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+
+body.dark-mode .nav-links a {
+  color: #eee;
+}
+
+body.dark-mode .nav-links a:hover {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+body.dark-mode #theme-toggle {
+  color: #eee;
+}
+
+body.dark-mode #theme-toggle:hover {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+body.dark-mode .hero {
+  text-shadow: 1px 1px 7px rgba(0,0,0,0.9);
+}
+
+body.dark-mode .btn-primary {
+  background-color: #2980b9;
+  box-shadow: 0 5px 15px rgba(41, 128, 185, 0.6);
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #1c5d8b;
+}
+
+body.dark-mode .site-footer {
+  background-color: #111;
+  color: #ccc;
+}

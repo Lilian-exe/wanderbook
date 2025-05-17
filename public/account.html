@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contul meu - WanderBook</title>
+  <link rel="stylesheet" href="css/account.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="account-container">
+    <h2>Contul meu</h2>
+    <section id="profile-section">
+      <img id="profile-pic" src="assets/profile-default.png" alt="Imagine profil" />
+      <div>
+        <p><strong>Nume complet:</strong> <span id="profile-name"></span></p>
+        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+      </div>
+    </section>
+
+    <section id="update-password-section">
+      <h3>Schimbă parola</h3>
+      <form id="password-form">
+        <label for="current-password">Parolă curentă:</label>
+        <input type="password" id="current-password" required />
+
+        <label for="new-password">Parolă nouă:</label>
+        <input type="password" id="new-password" required />
+
+        <label for="confirm-new-password">Confirmă parola nouă:</label>
+        <input type="password" id="confirm-new-password" required />
+
+        <button type="submit">Schimbă parola</button>
+      </form>
+      <div id="password-message" class="hidden"></div>
+    </section>
+
+    <section id="reservations-section">
+      <h3>Istoric rezervări</h3>
+      <ul id="reservations-list"></ul>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/account.js"></script>
+  <script>
+    async function loadComponents() {
+      const navbarRes = await fetch('navbar.html');
+      document.getElementById('navbar-container').innerHTML = await navbarRes.text();
+
+      const footerRes = await fetch('footer.html');
+      document.getElementById('footer-container').innerHTML = await footerRes.text();
+
+      if(window.initNavbar) window.initNavbar();
+    }
+    loadComponents();
+  </script>
+</body>
+</html>
