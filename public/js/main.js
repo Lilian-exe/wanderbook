@@ -6,7 +6,7 @@ function initNavbar() {
 
   // Link-urile navbarului, exemplu: dacă nu ești logat
   const links = [
-    { text: 'Acasă', href: '#' },
+    { text: 'Acasă', href: 'index.html' },
     { text: 'Catalog', href: 'catalog.html' },
     { text: 'Login', href: 'login.html' },
     { text: 'Register', href: 'register.html' }
