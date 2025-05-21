@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Obține toate planurile turistice, cu filtru opțional (țară, rating, preț)
 router.get("/", (req, res) => {
-  const { country, minPrice, maxPrice, minRating } = req.query;
+  const { country, minPrice, maxPrice, minRating, sort, search } = req.query;
 
   let query = "SELECT * FROM plans WHERE 1=1";
   let params = [];
@@ -26,6 +26,17 @@ router.get("/", (req, res) => {
     query += " AND rating >= ?";
     params.push(minRating);
   }
+  if (search) {
+    query += " AND (LOWER(title) LIKE ? OR LOWER(description) LIKE ?)";
+    params.push(`%${search.toLowerCase()}%`, `%${search.toLowerCase()}%`);
+  }
+
+  // Sortare
+  if (sort === "price_asc") query += " ORDER BY price ASC";
+  else if (sort === "price_desc") query += " ORDER BY price DESC";
+  else if (sort === "rating_desc") query += " ORDER BY rating DESC";
+  else if (sort === "title_asc") query += " ORDER BY title ASC";
+  else query += " ORDER BY id ASC";
 
   db.all(query, params, (err, rows) => {
     if (err) return res.status(500).json({ message: "Eroare la extragerea planurilor." });

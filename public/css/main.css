@@ -1,0 +1,104 @@
+/* Container comun */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* HEADER NAVBAR */
+.header {
+  background-color: #004080;
+  color: white;
+  padding: 15px 0;
+  transition: background-color 0.3s;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 8px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #99ccff;
+}
+
+/* Buton schimbare temă */
+.btn-theme {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: color 0.3s;
+}
+
+.btn-theme:hover {
+  color: #99ccff;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #004080;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+/* THEMĂ ÎNCHISĂ */
+body.dark-theme {
+  background-color: #121212;
+  color: #ddd;
+}
+
+body.dark-theme .header {
+  background-color: #001a33;
+}
+
+body.dark-theme .footer {
+  background-color: #001a33;
+}
+
+body.dark-theme .nav-link,
+body.dark-theme .logo,
+body.dark-theme .btn-theme {
+  color: #aaddff;
+}
+
+body.dark-theme .nav-link:hover,
+body.dark-theme .nav-link.active,
+body.dark-theme .btn-theme:hover {
+  color: #77bbff;
+}
+
+/* Main content margin */
+.main-content {
+  padding: 20px 0;
+}

@@ -13,6 +13,12 @@
   <main class="hero" id="hero">
     <h1 id="hero-title">Bine ai venit la WanderBook</h1>
     <p id="hero-subtitle">Platforma ta pentru călătorii și rezervări rapide și ușoare.</p>
+    
+    <div class="auth-buttons">
+      <button id="login-main" class="btn-secondary">Login</button>
+      <button id="logout-main" class="btn-secondary" style="display: none;">Logout</button>
+    </div>
+    
     <button id="reserve-btn" class="btn-primary">Rezervă acum</button>
   </main>
 
@@ -31,6 +37,25 @@
 
       // Initialize background slideshow after components loaded
       if(window.initBackgroundSlideshow) window.initBackgroundSlideshow();
+
+      // Add click handler for main page buttons
+      const loginMain = document.getElementById('login-main');
+      const logoutMain = document.getElementById('logout-main');
+
+      if (loginMain) {
+        loginMain.addEventListener('click', () => {
+          window.location.href = 'login.html';
+        });
+      }
+
+      if (logoutMain) {
+        logoutMain.addEventListener('click', () => {
+          // Replace server logout with local logout
+          localStorage.removeItem('loggedIn');
+          localStorage.removeItem('userName');
+          window.location.reload();
+        });
+      }
     }
     loadComponents();
 

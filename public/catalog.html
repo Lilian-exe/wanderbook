@@ -5,53 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalog planuri turistice - WanderBook</title>
   <link rel="stylesheet" href="../public/css/catalog.css" />
+  <link rel="stylesheet" href="../public/css/style.css" />
+  <link rel="stylesheet" href="../public/css/dark.css" id="dark-theme" />
 </head>
 <body>
   <div id="navbar-container"></div>
 
   <main class="catalog-container">
     <h2>Planuri turistice</h2>
-    <button id="filter-toggle">Filtrare</button>
-    <div id="filter-menu" class="hidden">
-      <form id="filter-form">
-        <label>
-          Reviewuri:
-          <select name="rating" id="rating">
-            <option value="">Toate</option>
-            <option value="3">3 stele+</option>
-            <option value="4">4 stele+</option>
-            <option value="5">5 stele</option>
-          </select>
-        </label>
+    
+    <div class="catalog-header">
+      <div class="results-count" id="results-count">Se încarcă...</div>
+      
+      <div class="filters-container">
+        <button id="filter-toggle" class="btn-secondary">Filtrare</button>
+        
+        <div id="filter-menu" class="filter-card">
+          <form id="filter-form">
+            <div class="filter-row">
+              <div class="filter-group">
+                <label>Rating minim:</label>
+                <select name="rating" id="rating">
+                  <option value="">Toate</option>
+                  <option value="3">3 stele+</option>
+                  <option value="4">4 stele+</option>
+                  <option value="5">5 stele</option>
+                </select>
+              </div>
 
-        <label>
-          Țară:
-          <select name="country" id="country">
-            <option value="">Toate</option>
-            <option value="turcia">Turcia</option>
-            <option value="grecia">Grecia</option>
-            <option value="bulgaria">Bulgaria</option>
-          </select>
-        </label>
+              <div class="filter-group">
+                <label>Țară:</label>
+                <select name="country" id="country">
+                  <option value="">Toate</option>
+                  <option value="franța">Franța</option>
+                  <option value="românia">România</option>
+                  <option value="turcia">Turcia</option>
+                  <option value="grecia">Grecia</option>
+                  <option value="bulgaria">Bulgaria</option>
+                  <option value="italia">Italia</option>
+                  <option value="austria">Austria</option>
+                  <option value="republica cehă">Republica Cehă</option>
+                  <option value="ungaria">Ungaria</option>
+                  <option value="germania">Germania</option>
+                  <option value="spania">Spania</option>
+                  <option value="regatul unit">Regatul Unit</option>
+                  <option value="croația">Croația</option>
+                  <option value="elveția">Elveția</option>
+                </select>
+              </div>
+            </div>
 
-        <label>
-          Preț (EUR):
-          <input type="number" name="price-min" id="price-min" placeholder="Min" min="0" />
-          -
-          <input type="number" name="price-max" id="price-max" placeholder="Max" min="0" />
-        </label>
+            <div class="filter-row">
+              <div class="filter-group">
+                <label>Preț (EUR):</label>
+                <div class="price-range">
+                  <input type="number" name="price-min" id="price-min" placeholder="Min" min="0" />
+                  <span>-</span>
+                  <input type="number" name="price-max" id="price-max" placeholder="Max" min="0" />
+                </div>
+              </div>
 
-        <button type="submit">Aplică filtrele</button>
-      </form>
+              <div class="filter-group">
+                <label>Căutare:</label>
+                <input type="text" name="search" id="search" placeholder="Caută destinație sau descriere..." />
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <div class="filter-group">
+                <label>Sortează după:</label>
+                <select name="sort" id="sort">
+                  <option value="">Implicit</option>
+                  <option value="price_asc">Preț crescător</option>
+                  <option value="price_desc">Preț descrescător</option>
+                  <option value="rating_desc">Rating descrescător</option>
+                  <option value="title_asc">Alfabetic (A-Z)</option>
+                </select>
+              </div>
+              
+              <div class="filter-actions">
+                <button type="submit" class="btn-primary">Aplică filtrele</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <div id="plans-container">
+    <div id="plans-container" class="plans-grid">
       <!-- Planurile turistice vor fi încărcate din JS -->
     </div>
   </main>
 
   <div id="footer-container"></div>
 
+  <script src="../public/js/main.js"></script>
   <script src="../public/js/catalog.js"></script>
   <script>
     async function loadComponents() {
@@ -62,7 +110,11 @@
       document.getElementById('footer-container').innerHTML = await footerRes.text();
 
       if(window.initNavbar) window.initNavbar();
+      
+      // Initialize theme toggle
+      if(window.initThemeToggle) window.initThemeToggle();
     }
+    
     loadComponents();
   </script>
 </body>

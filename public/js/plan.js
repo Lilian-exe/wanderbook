@@ -26,16 +26,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       <p class="description">${plan.description}</p>
       <p class="price">Preț: ${plan.price} EUR</p>
       <button id="reserve-btn" class="reserve-btn">Rezervă acum</button>
-    `;
-
-    if(plan.reviews && plan.reviews.length > 0) {
-      reviewsContainer.innerHTML = plan.reviews.map(r => `
-        <div class="review-card">
-          <p class="review-author">${r.author}</p>
-          <p class="review-text">${r.text}</p>
-          <p class="review-rating">Rating: ${r.rating} ⭐</p>
-        </div>
-      `).join('');
+    `;    if(plan.reviews && plan.reviews.length > 0) {
+      reviewsContainer.innerHTML = plan.reviews.map(r => {
+        const cardUrl = `https://www.${r.author.toLowerCase().replace(/\s+/g, '')}.com`;
+        
+        return `
+        <a href="${cardUrl}" class="review-card" style="text-decoration: none; color: inherit; cursor: pointer; display: block;">
+          <div class="review-card">
+            <p class="review-author">${r.author}</p>
+            <p class="review-text">${r.text}</p>
+            <p class="review-rating">Rating: ${r.rating} ⭐</p>
+          </div>
+        </a>
+      `}).join('');
     } else {
       reviewsContainer.innerHTML = "<p>Nu există recenzii încă.</p>";
     }

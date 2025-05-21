@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Your Email</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <header id="navbar-placeholder"></header>
+    
+    <div class="container register-container">
+        <h2>Email Verification</h2>
+        
+        <form id="verifyForm">
+            <div class="input-group">
+                <input type="email" id="email" name="email" required placeholder="Email">
+            </div>
+            <div class="input-group">
+                <input type="text" id="code" name="code" required placeholder="Verification Code">
+            </div>
+            <button type="submit">Verify Email</button>
+        </form>
+        <div id="verifyMessage"></div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+    
+    <!-- Include your auth.js script here if handling client-side JavaScript for form submission -->
+    <script src="js/auth.js"></script>
+</body>
+</html>

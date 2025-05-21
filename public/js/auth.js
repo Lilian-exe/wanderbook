@@ -1,9 +1,48 @@
-// LOGIN
+// Local authentication functions
+const LOCAL_USERS_KEY = 'local_users';
+const CURRENT_USER_KEY = 'current_user';
+
+// Initialize local users if not exists
+function initializeLocalUsers() {
+  if (!localStorage.getItem(LOCAL_USERS_KEY)) {
+    localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify([]));
+  }
+}
+
+// Login function
+function handleLocalLogin(email, password) {
+  initializeLocalUsers();
+  const users = JSON.parse(localStorage.getItem(LOCAL_USERS_KEY));
+  const user = users.find(u => u.email === email && u.password === password);
+  
+  if (user) {
+    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+    return { success: true, message: 'Autentificare reușită!', user };
+  }
+  return { success: false, message: 'Date de autentificare incorecte!' };
+}
+
+// Register function
+function handleLocalRegister(name, email, password) {
+  initializeLocalUsers();
+  const users = JSON.parse(localStorage.getItem(LOCAL_USERS_KEY));
+  
+  if (users.find(u => u.email === email)) {
+    return { success: false, message: 'Email-ul este deja înregistrat!' };
+  }
+  
+  const newUser = { id: Date.now(), name, email, password };
+  users.push(newUser);
+  localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify(users));
+  return { success: true, message: 'Cont creat cu succes!', user: newUser };
+}
+
+// LOGIN HANDLER
 const loginForm = document.getElementById('login-form');
 const loginError = document.getElementById('login-error');
 
-if(loginForm) {
-  loginForm.addEventListener('submit', async (e) => {
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const email = loginForm.email.value.trim();
@@ -14,34 +53,25 @@ if(loginForm) {
       return;
     }
 
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ email, password })
-      });
-
-      const data = await response.json();
-
-      if(response.ok) {
-        localStorage.setItem('token', data.token);
-        window.location.href = '/';
-      } else {
-        loginError.textContent = data.message || "Eroare la autentificare.";
-      }
-    } catch (err) {
-      loginError.textContent = "Eroare server, încearcă mai târziu.";
+    const result = handleLocalLogin(email, password);
+    
+    if (result.success) {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('userName', result.user.name);
+      window.location.href = '/';
+    } else {
+      loginError.textContent = result.message;
     }
   });
 }
 
-// REGISTER
+// REGISTER HANDLER
 const registerForm = document.getElementById('register-form');
 const registerError = document.getElementById('register-error');
 const registerSuccess = document.getElementById('register-success');
 
-if(registerForm) {
-  registerForm.addEventListener('submit', async (e) => {
+if (registerForm) {
+  registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const name = registerForm.name.value.trim();
@@ -54,61 +84,69 @@ if(registerForm) {
       return;
     }
 
-    if(password !== confirmPassword) {
+    if (password !== confirmPassword) {
       registerError.textContent = "Parolele nu coincid!";
       return;
     }
 
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ name, email, password })
-      });
-
-      const data = await response.json();
-
-      if(response.ok) {
-        registerSuccess.textContent = "Înregistrare realizată cu succes! Acum te poți loga.";
-        registerError.textContent = '';
-        registerForm.reset();
-      } else {
-        registerError.textContent = data.message || "Eroare la înregistrare.";
-      }
-    } catch (err) {
-      registerError.textContent = "Eroare server, încearcă mai târziu.";
+    const result = handleLocalRegister(name, email, password);
+    
+    if (result.success) {
+      registerSuccess.textContent = result.message;
+      registerError.textContent = '';
+      registerForm.reset();
+        setTimeout(() => {
+          window.location.href = '/public/login.html';
+        }, 2000);
+    } else {
+      registerError.textContent = result.message;
     }
   });
 }
 
-// LOGOUT și actualizare navbar
+// LOGOUT HANDLER
 const logoutBtn = document.getElementById('logout-btn');
 
-if(logoutBtn) {
+if (logoutBtn) {
   logoutBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    localStorage.removeItem('token');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userName');
     window.location.href = '/';
   });
 }
 
-// Actualizare navbar după stare autentificare
+// BUTTON VISIBILITY HANDLER
 document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('token');
+  const isLoggedIn = localStorage.getItem('loggedIn');
+  const userName = localStorage.getItem('userName');
   const loginLink = document.querySelector('nav a[href*="login.html"]');
   const registerLink = document.querySelector('nav a[href*="register.html"]');
   const logoutLink = document.querySelector('nav a[href*="logout.html"]');
   const accountLink = document.querySelector('nav a[href*="account.html"]');
+  const mainPageLogin = document.getElementById('login-main');
+  const mainPageLogout = document.getElementById('logout-main');
 
-  if(token) {
+  if (isLoggedIn) {
     if(loginLink) loginLink.style.display = 'none';
     if(registerLink) registerLink.style.display = 'none';
     if(logoutLink) logoutLink.style.display = 'inline-block';
     if(accountLink) accountLink.style.display = 'inline-block';
+    
+    if (mainPageLogin) mainPageLogin.style.display = 'none';
+    if (mainPageLogout) mainPageLogout.style.display = 'inline-block';
+    
+    const greeting = document.querySelector('.user-greeting');
+    if (greeting && userName) {
+      greeting.textContent = `Bună, ${userName}!`;
+    }
   } else {
     if(loginLink) loginLink.style.display = 'inline-block';
     if(registerLink) registerLink.style.display = 'inline-block';
     if(logoutLink) logoutLink.style.display = 'none';
     if(accountLink) accountLink.style.display = 'none';
+    
+    if (mainPageLogin) mainPageLogin.style.display = 'inline-block';
+    if (mainPageLogout) mainPageLogout.style.display = 'none';
   }
 });
